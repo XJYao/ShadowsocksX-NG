@@ -266,10 +266,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         guard let profile = mgr.getActiveProfile() else {
             return
         }
-        guard let rootPassword = profile.rootPassword else {
+        guard let rootPassword = profile.rootPassword, rootPassword.count > 0 else {
             return
         }
         let serverHost = profile.serverHost
+        guard serverHost.count > 0 else {
+            return
+        }
         
         // python脚本文件路径
         guard let aPath = Bundle.main.path(forResource: "ConfigIPToServer", ofType: "py") else { return }
