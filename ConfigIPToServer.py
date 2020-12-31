@@ -5,19 +5,25 @@ try:
     from requests import get
 except ImportError:
     print("正在安装requests")
-    res = os.system("pip3 install requests -i https:\/\/pypi.douban.com\/simple\/--trusted-host pypi.douban.com")
+    res = os.system("pip3 install requests")
     if res != 0:
-        print("requests安装失败")
-        exit(0)
+        print("requests安装失败，切换源重试")
+        res = os.system("pip3 install requests -i https:\/\/pypi.douban.com\/simple\/--trusted-host pypi.douban.com")
+        if res != 0:
+            print("requests安装失败")
+            exit(0)
 
 try:
     import paramiko
 except ImportError:
     print("正在安装paramiko")
-    res = os.system("pip3 install paramiko -i https:\/\/pypi.douban.com\/simple\/--trusted-host pypi.douban.com")
+    res = os.system("pip3 install paramiko")
     if res != 0:
-        print("paramiko安装失败")
-        exit(0)
+        print("paramiko安装失败，切换源重试")
+        res = os.system("pip3 install paramiko -i https:\/\/pypi.douban.com\/simple\/--trusted-host pypi.douban.com")
+        if res != 0:
+            print("paramiko安装失败")
+            exit(0)
         
 # 外部传入的参数集合
 allArgvs = sys.argv[1:]
